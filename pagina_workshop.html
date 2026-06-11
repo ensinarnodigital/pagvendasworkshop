@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Da Expertise ao Ativo Rentável — Workshop Prático</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:    #0f1118;
+  --navy:    #161d35;
+  --indigo:  #1e2d6b;
+  --violet:  #3d4fa0;
+  --gold:    #d97706;
+  --goldL:   #f0b429;
+  --goldP:   #fff8e8;
+  --white:   #ffffff;
+  --offW:    #f7f6f2;
+  --text:    #1a1f3a;
+  --muted:   #6b7280;
+  --border:  #e5e4de;
+  --sage:    #4a7c59;
+  --rust:    #c1440e;
+  --shadow:  0 4px 32px rgba(15,17,24,.10);
+  --shadow2: 0 12px 56px rgba(15,17,24,.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--white);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.sans { font-family: 'Syne', sans-serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ── TOPBAR ─── */
+.topbar {
+  background: var(--dark);
+  padding: 10px 20px;
+  text-align: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--goldL);
+  letter-spacing: .5px;
+}
+
+/* ── HERO ─── */
+.hero {
+  background: var(--dark);
+  padding: 80px 20px 90px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 40%, rgba(61,79,160,.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 60%, rgba(217,119,6,.14) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--gold), var(--goldL));
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 820px; margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--goldL);
+  border: 1px solid rgba(240,180,41,.3);
+  padding: 6px 18px; border-radius: 4px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(34px, 6vw, 60px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -1.5px; color: var(--white);
+  margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--goldL); }
+
+.hero .sub {
+  font-size: clamp(17px, 2.5vw, 21px);
+  font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,.62);
+  max-width: 640px; margin: 0 auto 36px;
+}
+
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 44px;
+}
+
+.pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  padding: 7px 18px; border-radius: 4px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.75);
+}
+
+.btn-hero {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold); color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 800;
+  padding: 18px 44px; border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(217,119,6,.4);
+  transition: all .25s;
+}
+.btn-hero:hover {
+  background: var(--goldL); transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(217,119,6,.5);
+}
+
+.hero-note {
+  margin-top: 16px;
+  font-size: 13px; color: rgba(255,255,255,.38);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── CONTAINER ─── */
+.container { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+.container-sm { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+/* ── SECTION ─── */
+section { padding: 80px 20px; }
+.section-alt { background: var(--offW); }
+.section-dark { background: var(--dark); }
+.section-navy { background: var(--navy); }
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -.5px; color: var(--text);
+  margin-bottom: 16px;
+}
+.section-title.light { color: var(--white); }
+.section-lead {
+  font-size: 18px; color: var(--muted);
+  font-style: italic; max-width: 640px;
+  margin-bottom: 48px;
+}
+.section-lead.light { color: rgba(255,255,255,.55); }
+
+/* ── PROBLEMA ─── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.prob-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--rust);
+  border-radius: 12px; padding: 28px;
+  box-shadow: var(--shadow);
+}
+.prob-card .icon { font-size: 32px; margin-bottom: 14px; }
+.prob-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  margin-bottom: 10px; color: var(--text);
+}
+.prob-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* ── PARA QUEM ─── */
+.forwhom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.fw-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-top: 3px solid var(--gold);
+  border-radius: 12px; padding: 28px;
+}
+.fw-card .icon { font-size: 36px; margin-bottom: 14px; }
+.fw-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--white); margin-bottom: 14px;
+}
+.fw-card ul { list-style: none; }
+.fw-card li {
+  padding: 7px 0 7px 24px;
+  position: relative; font-size: 14px;
+  color: rgba(255,255,255,.72); line-height: 1.5;
+}
+.fw-card li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: var(--gold); font-weight: 700;
+}
+
+/* ── SOBRE O WORKSHOP ─── */
+.workshop-box {
+  background: var(--navy);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; padding: 48px 40px;
+  max-width: 860px; margin: 0 auto;
+}
+.workshop-meta {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin-bottom: 36px;
+}
+.wm-item {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px; padding: 12px 20px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,.8);
+}
+.wm-item strong {
+  font-family: 'Syne', sans-serif;
+  color: var(--goldL);
+  display: block; font-size: 12px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ── FERRAMENTAS ─── */
+.tools-list { display: flex; flex-direction: column; gap: 20px; }
+.tool-row {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all .25s;
+}
+.tool-row:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow2);
+  border-color: var(--gold);
+}
+.tool-num {
+  background: var(--dark);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; padding: 20px 0;
+}
+.tool-num .n {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--goldL);
+}
+.tool-num .e { font-size: 20px; }
+.tool-body { padding: 22px 26px; }
+.tool-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--text); margin-bottom: 6px;
+}
+.tool-body .tdesc { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+.tool-outcome {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--sage); font-weight: 600;
+  font-family: 'Syne', sans-serif;
+}
+
+/* ── AGENDA ─── */
+.agenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.agenda-item {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px; padding: 20px 22px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.agenda-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--gold);
+  background: rgba(217,119,6,.12);
+  border: 1px solid rgba(217,119,6,.25);
+  padding: 4px 10px; border-radius: 4px;
+  flex-shrink: 0; margin-top: 3px;
+  white-space: nowrap;
+}
+.agenda-text h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--white); margin-bottom: 4px;
+}
+.agenda-text p {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.5; font-style: italic;
+}
+
+/* ── RESULTADO ─── */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.result-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--sage);
+  border-radius: 12px; padding: 28px;
+  box-shadow: var(--shadow);
+}
+.result-card .icon { font-size: 36px; margin-bottom: 14px; }
+.result-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+.result-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── GARANTIA ─── */
+.guarantee-box {
+  max-width: 760px; margin: 0 auto;
+  background: var(--goldP);
+  border: 2px solid var(--gold);
+  border-radius: 16px; padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(217,119,6,.15);
+}
+.guarantee-box .shield { font-size: 56px; margin-bottom: 16px; }
+.guarantee-box h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 800;
+  color: var(--text); margin-bottom: 14px;
+}
+.guarantee-box p { font-size: 17px; color: var(--text); line-height: 1.7; max-width: 580px; margin: 0 auto 12px; }
+
+/* ── CHECKOUT ─── */
+.checkout-section {
+  background: var(--dark);
+  padding: 80px 20px;
+}
+.checkout-inner {
+  max-width: 1040px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: start;
+}
+.checkout-left h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800; color: var(--white);
+  margin-bottom: 16px; letter-spacing: -.5px;
+}
+.checkout-left p {
+  font-size: 16px; color: rgba(255,255,255,.55);
+  font-style: italic; margin-bottom: 28px;
+}
+.price-display {
+  margin-bottom: 28px;
+}
+.price-display .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 6px;
+}
+.price-display .amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px; font-weight: 800;
+  color: var(--goldL); line-height: 1;
+  margin-bottom: 6px;
+}
+.price-display .amount small {
+  font-size: 24px; color: rgba(255,255,255,.45);
+}
+.price-display .installment {
+  font-size: 14px; color: rgba(255,255,255,.5);
+  font-family: 'Syne', sans-serif;
+}
+.includes-list { list-style: none; margin-bottom: 24px; }
+.includes-list li {
+  padding: 9px 0 9px 28px;
+  position: relative;
+  font-size: 14px; color: rgba(255,255,255,.8);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  line-height: 1.5;
+}
+.includes-list li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: var(--sage); font-weight: 700; font-size: 16px;
+}
+.includes-list li:last-child { border-bottom: none; }
+.guarantee-note {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,.45);
+  font-family: 'Syne', sans-serif;
+}
+
+/* KIWIFY EMBED */
+.checkout-right {
+  background: var(--white);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow2);
+  min-height: 520px;
+}
+.kiwify-frame {
+  width: 100%; min-height: 520px;
+  border: none; display: block;
+}
+
+/* ── FAQ ─── */
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.faq-q {
+  padding: 20px 24px;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--text); cursor: pointer;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 16px;
+  transition: background .2s;
+}
+.faq-q:hover { background: var(--offW); }
+.faq-icon { font-size: 20px; color: var(--gold); transition: transform .3s; flex-shrink: 0; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease;
+}
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a-inner {
+  padding: 0 24px 20px;
+  font-size: 15px; color: var(--muted); line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* ── CTA FINAL ─── */
+.final-cta {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 100%);
+  padding: 100px 20px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(217,119,6,.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.final-cta-inner { position: relative; max-width: 720px; margin: 0 auto; }
+.final-cta h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800; color: var(--white);
+  margin-bottom: 18px; letter-spacing: -.5px;
+}
+.final-cta p {
+  font-size: 19px; font-style: italic;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 40px;
+}
+
+/* ── FOOTER ─── */
+footer {
+  background: #080a10;
+  padding: 36px 20px; text-align: center;
+  font-size: 13px; color: rgba(255,255,255,.28);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.8;
+}
+
+/* ── UTILS ─── */
+.divider {
+  width: 60px; height: 3px;
+  background: var(--gold);
+  margin: 0 0 32px;
+}
+.divider.center { margin: 0 auto 32px; }
+.text-center { text-align: center; }
+.text-center .section-lead { margin-left: auto; margin-right: auto; }
+
+/* ── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  section { padding: 60px 16px; }
+  .checkout-inner { grid-template-columns: 1fr; gap: 32px; }
+  .checkout-right { min-height: 600px; }
+  .kiwify-frame { min-height: 600px; }
+  .workshop-box { padding: 32px 20px; }
+  .tool-row { grid-template-columns: 64px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🔥 Vagas limitadas — Garanta sua participação agora
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🛠️ Workshop Prático · ~5 horas · Online</div>
+    <h1>Da <span>Expertise</span><br>ao Ativo Rentável</h1>
+    <p class="sub">Transforme décadas de conhecimento em um minicurso estruturado e rentável — ao vivo, na prática, com as 5 ferramentas do Kit de Transformação</p>
+    <div class="hero-pills">
+      <div class="pill">⏱ ~5 horas de imersão prática</div>
+      <div class="pill">🛠️ 5 ferramentas interativas com IA</div>
+      <div class="pill">📄 5 documentos gerados ao final</div>
+      <div class="pill">🎯 Vagas limitadas</div>
+    </div>
+    <a href="#checkout" class="btn-hero">🚀 Garantir minha vaga</a>
+    <p class="hero-note">R$ 197 · Garantia de 7 dias · Acesso imediato após confirmação</p>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="section-alt">
+  <div class="container">
+    <div class="section-eyebrow">O paradoxo do profissional experiente</div>
+    <div class="section-title">Você sabe muito.<br>Mas esse conhecimento ainda está preso.</div>
+    <div class="divider"></div>
+    <div class="problem-grid">
+      <div class="prob-card">
+        <div class="icon">😔</div>
+        <h3>Não sabe por onde começar</h3>
+        <p>O conhecimento existe, a vontade existe — mas criar um curso parece imenso, complexo e cheio de etapas que você nunca aprendeu.</p>
+      </div>
+      <div class="prob-card">
+        <div class="icon">🤔</div>
+        <h3>Duvida do próprio valor</h3>
+        <p>O que é óbvio para quem tem décadas de experiência é exatamente o que quem está começando pagaria para aprender. Mas a dúvida paralisa.</p>
+      </div>
+      <div class="prob-card">
+        <div class="icon">😰</div>
+        <h3>A tecnologia parece um obstáculo</h3>
+        <p>Plataformas, ferramentas, gravação, edição — um universo que parece distante demais e que ninguém explica de forma simples e acessível.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="section-dark">
+  <div class="container">
+    <div class="section-eyebrow" style="text-align:center">Identifique-se</div>
+    <div class="section-title light text-center">Este workshop é para você se...</div>
+    <div class="divider center"></div>
+    <div class="forwhom-grid">
+      <div class="fw-card">
+        <div class="icon">🧭</div>
+        <h3>Profissional em transição</h3>
+        <ul>
+          <li>Tem décadas de experiência acumulada</li>
+          <li>Quer criar uma nova fonte de renda</li>
+          <li>Busca autonomia e relevância</li>
+          <li>Nunca criou um curso online</li>
+        </ul>
+      </div>
+      <div class="fw-card">
+        <div class="icon">🎓</div>
+        <h3>Especialista que quer ensinar</h3>
+        <ul>
+          <li>É referência na sua área há anos</li>
+          <li>Sempre quis criar um curso mas travou</li>
+          <li>Quer um método estruturado e validado</li>
+          <li>Pouca intimidade com tecnologia</li>
+        </ul>
+      </div>
+      <div class="fw-card">
+        <div class="icon">💼</div>
+        <h3>Consultor ou autônomo</h3>
+        <ul>
+          <li>Vende tempo em consultorias</li>
+          <li>Quer escalar sem trabalhar mais horas</li>
+          <li>Precisa de um produto digital complementar</li>
+          <li>Quer fortalecer autoridade online</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE O WORKSHOP -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">O que é este workshop</div>
+    <div class="section-title">Uma imersão prática de ~5 horas</div>
+    <div class="divider"></div>
+    <div class="workshop-box">
+      <div class="workshop-meta">
+        <div class="wm-item">
+          <span>🖥️</span>
+          <div><strong>Formato</strong>Online ao vivo</div>
+        </div>
+        <div class="wm-item">
+          <span>⏱️</span>
+          <div><strong>Duração</strong>~5 horas com pausas</div>
+        </div>
+        <div class="wm-item">
+          <span>🛠️</span>
+          <div><strong>Ferramentas</strong>5 ferramentas com IA</div>
+        </div>
+        <div class="wm-item">
+          <span>📄</span>
+          <div><strong>Entregáveis</strong>5 documentos gerados</div>
+        </div>
+        <div class="wm-item">
+          <span>👥</span>
+          <div><strong>Vagas</strong>Turmas limitadas</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;line-height:1.75;margin-bottom:0">
+        Não é uma aula expositiva. É uma sessão de trabalho orientada — você preenche cada ferramenta ao vivo, com o facilitador guiando o processo, esclarecendo dúvidas e garantindo que ninguém trave no caminho. Ao final de cada ferramenta, a inteligência artificial interpreta suas respostas e gera um documento completo. Você sai da oficina com cinco documentos concretos nas mãos — e com o primeiro roteiro pronto para gravar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- AS 5 FERRAMENTAS -->
+<section class="section-alt">
+  <div class="container">
+    <div class="section-eyebrow">O que você vai usar</div>
+    <div class="section-title">As 5 ferramentas do Kit de Transformação</div>
+    <div class="section-lead">Cada ferramenta conduz uma etapa do processo. O resultado de uma alimenta a próxima.</div>
+    <div class="tools-list">
+      <div class="tool-row">
+        <div class="tool-num"><span class="n">01</span><span class="e">🗺️</span></div>
+        <div class="tool-body">
+          <h3>Inventário de Trajetória Profissional</h3>
+          <p class="tdesc">7 etapas que organizam décadas de experiência — trajetória, competências, conquistas e conhecimento tácito. A ferramenta mais reflexiva do kit.</p>
+          <div class="tool-outcome">✅ Relatório de Trajetória com síntese do perfil e competências únicas</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-num"><span class="n">02</span><span class="e">👤</span></div>
+        <div class="tool-body">
+          <h3>Identificador de Persona</h3>
+          <p class="tdesc">6 etapas para mapear com precisão o aluno ideal — dores, desejos, linguagem, objeções e comportamento. A base de toda comunicação do curso.</p>
+          <div class="tool-outcome">✅ Documento de Persona com perfil completo e orientações práticas</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-num"><span class="n">03</span><span class="e">🎯</span></div>
+        <div class="tool-body">
+          <h3>Recorte de Nicho</h3>
+          <p class="tdesc">5 fases de posicionamento estratégico. Inclui o construtor interativo da Declaração de Nicho e um score de viabilidade com 6 critérios automáticos.</p>
+          <div class="tool-outcome">✅ Declaração de Nicho validada — "Eu ajudo [quem] a [fazer o quê] para que [resultado]"</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-num"><span class="n">04</span><span class="e">🏗️</span></div>
+        <div class="tool-body">
+          <h3>Estruturador de Minicurso</h3>
+          <p class="tdesc">6 fases com builder dinâmico de módulos e aulas, objetivo ABCD com preview em tempo real e plano de produção para os primeiros 30 dias.</p>
+          <div class="tool-outcome">✅ Plano Completo do Minicurso com arquitetura pedagógica validada</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-num"><span class="n">05</span><span class="e">🎬</span></div>
+        <div class="tool-body">
+          <h3>Roteirizador de Aulas</h3>
+          <p class="tdesc">5 etapas que transformam cada aula em um roteiro em linguagem falada — abertura com gancho, desenvolvimento com 3 pontos e fechamento com CTA.</p>
+          <div class="tool-outcome">✅ Roteiro pronto para gravar — em linguagem natural, com marcações de pausa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section class="section-navy">
+  <div class="container">
+    <div class="section-eyebrow" style="text-align:center">Como vai funcionar</div>
+    <div class="section-title light text-center">Agenda do Workshop</div>
+    <div class="divider center"></div>
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <div class="agenda-time">30 min</div>
+        <div class="agenda-text">
+          <h4>Abertura e alinhamento</h4>
+          <p>Apresentação da jornada, combinados e aquecimento reflexivo</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">50 min</div>
+        <div class="agenda-text">
+          <h4>Ferramenta 01 — Inventário</h4>
+          <p>Mapeamento da trajetória e do conhecimento tácito</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">40 min</div>
+        <div class="agenda-text">
+          <h4>Ferramenta 02 — Persona</h4>
+          <p>Definição do aluno ideal com precisão</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">15 min</div>
+        <div class="agenda-text">
+          <h4>☕ Pausa</h4>
+          <p>Releitura dos documentos gerados e reflexão</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">40 min</div>
+        <div class="agenda-text">
+          <h4>Ferramenta 03 — Nicho</h4>
+          <p>Posicionamento validado e declaração de nicho</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">45 min</div>
+        <div class="agenda-text">
+          <h4>Ferramenta 04 — Estruturador</h4>
+          <p>Arquitetura completa do minicurso</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">15 min</div>
+        <div class="agenda-text">
+          <h4>☕ Pausa</h4>
+          <p>Preparação para a última etapa</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">35 min</div>
+        <div class="agenda-text">
+          <h4>Ferramenta 05 — Roteirizador</h4>
+          <p>Roteiro da primeira aula pronto para gravar</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-time">10 min</div>
+        <div class="agenda-text">
+          <h4>Encerramento</h4>
+          <p>Comprometimento com data de gravação e próximos passos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADO -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">O que você sai com</div>
+    <div class="section-title">5 documentos concretos ao final do workshop</div>
+    <div class="section-lead">Não é teoria. São arquivos reais que você vai usar para gravar, publicar e divulgar seu curso.</div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="icon">📄</div>
+        <h3>Relatório de Trajetória</h3>
+        <p>Síntese do seu perfil profissional com competências únicas, conquistas e 3 próximos passos concretos.</p>
+      </div>
+      <div class="result-card">
+        <div class="icon">👤</div>
+        <h3>Documento de Persona</h3>
+        <p>Perfil detalhado do aluno ideal com dores, desejos, vocabulário e orientações para criar conteúdo que conecta.</p>
+      </div>
+      <div class="result-card">
+        <div class="icon">🎯</div>
+        <h3>Declaração de Nicho</h3>
+        <p>Posicionamento validado por 6 critérios. A frase que vai para bio, página de vendas e apresentação do curso.</p>
+      </div>
+      <div class="result-card">
+        <div class="icon">🏗️</div>
+        <h3>Plano Completo do Minicurso</h3>
+        <p>Módulos, aulas, formatos, avaliação e cronograma de produção para os primeiros 30 dias.</p>
+      </div>
+      <div class="result-card">
+        <div class="icon">🎬</div>
+        <h3>Roteiro da Primeira Aula</h3>
+        <p>Roteiro em linguagem falada com gancho, 3 pontos, analogia, CTA e notas de edição. É só abrir e gravar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="section-alt">
+  <div class="container">
+    <div class="guarantee-box">
+      <div class="shield">🛡️</div>
+      <h2>Garantia de 7 Dias</h2>
+      <p>Participe do workshop completo, use todas as ferramentas e avalie os resultados. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do seu investimento.</p>
+      <p style="font-size:14px;color:var(--muted);margin-top:16px">Sem perguntas. Sem burocracia. O risco é todo nosso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT (Kiwify incorporado) -->
+<div class="checkout-section" id="checkout">
+  <div class="checkout-inner">
+    <div class="checkout-left">
+      <h2>Garanta sua vaga agora</h2>
+      <p>Acesso imediato após confirmação do pagamento</p>
+
+      <div class="price-display">
+        <div class="label">Investimento</div>
+        <div class="amount">R$ 197 <small>à vista</small></div>
+        <div class="installment">ou até 12x no cartão</div>
+      </div>
+
+      <ul class="includes-list">
+        <li>Participação no workshop completo (~5 horas)</li>
+        <li>5 ferramentas interativas com IA — acesso vitalício</li>
+        <li>Guia interativo online + guia do participante (PDF)</li>
+        <li>Gravação da sessão disponível por 30 dias</li>
+        <li>Bônus: conversa 1:1 de 30 minutos após o workshop</li>
+        <li>Garantia de 7 dias — satisfação total</li>
+      </ul>
+
+      <div class="guarantee-note">
+        🛡️ Pagamento 100% seguro · Processado pela Kiwify
+      </div>
+    </div>
+
+    <div class="checkout-right">
+      <!--
+        INSTRUÇÕES DE INCORPORAÇÃO DO CHECKOUT KIWIFY:
+        1. Acesse sua conta na Kiwify
+        2. Vá em Produtos → seu produto → Checkout
+        3. Clique em "Incorporar checkout" ou "Embed"
+        4. Copie o código iframe gerado
+        5. Substitua o iframe abaixo pelo código copiado
+
+        Se a Kiwify não oferecer iframe, use o botão de link direto:
+        Substitua o src abaixo pela URL do seu checkout Kiwify
+      -->
+      <iframe
+        class="kiwify-frame"
+        src="https://pay.kiwify.com.br/9dXchc0"
+        title="Checkout — Da Expertise ao Ativo Rentável"
+        allow="payment"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow text-center">Dúvidas frequentes</div>
+    <div class="section-title text-center">Perguntas e respostas</div>
+    <div class="divider center"></div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Preciso saber de tecnologia para participar?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Não. As ferramentas funcionam direto no navegador — o mesmo programa que você usa para acessar o Google. Se você consegue preencher um formulário online, consegue usar o kit. O facilitador vai guiar cada etapa ao vivo.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>O workshop é ao vivo ou gravado?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">É ao vivo — essa é a proposta central. Você trabalha em tempo real, com orientação direta. A gravação da sessão ficará disponível por 30 dias para revisão, mas a experiência completa é presencial online.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Qual é a plataforma usada para o workshop?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">O workshop será realizado via Zoom ou Google Meet. O link de acesso será enviado por e-mail após a confirmação do pagamento. Você só precisa de um navegador e conexão à internet.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>E se eu não tiver um nicho definido ainda?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Perfeito. O workshop começa exatamente por aí. O Inventário de Trajetória e o Identificador de Persona foram criados para ajudar você a descobrir seu nicho a partir da sua própria experiência. Você não precisa chegar com nada definido.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Vou realmente sair com um roteiro pronto?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Sim. A última ferramenta — o Roteirizador de Aulas — gera um roteiro em linguagem falada, pronto para abrir e gravar. Ele já vem com marcações de pausa, sugestões de entonação e notas de edição. Ao final do workshop, o roteiro está na sua mão.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>O acesso às ferramentas é só durante o workshop?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Não. Ao adquirir a vaga, você tem acesso vitalício às 5 ferramentas do Kit de Transformação. Pode usar quantas vezes quiser — inclusive para criar novos cursos no futuro ou roteirizar novas aulas.</div>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Como funciona a garantia de 7 dias?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Você tem 7 dias corridos a partir da compra para participar do workshop e avaliar os resultados. Se por qualquer motivo não ficar satisfeito, basta enviar um e-mail solicitando o reembolso. Devolvemos 100% do valor, sem perguntas e sem burocracia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="final-cta">
+  <div class="final-cta-inner">
+    <h2>Você passou décadas aprendendo.</h2>
+    <p>Chegou a hora de transformar esse aprendizado em algo que gera renda, autoridade e legado.</p>
+    <a href="#checkout" class="btn-hero">🚀 Garantir minha vaga agora</a>
+    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">R$ 197 · Garantia de 7 dias · Acesso vitalício às ferramentas</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Da Expertise ao Ativo Rentável — Workshop Prático</p>
+  <p>Kit de Transformação do Conhecimento · Baseado no Modelo SECI — Nonaka & Takeuchi</p>
+  <p style="margin-top:10px">© 2026 · Todos os direitos reservados</p>
+</footer>
+
+<script>
+function toggleFaq(item) {
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Smooth scroll interno
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+
+</body>
+</html>
