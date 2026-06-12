@@ -426,16 +426,7 @@ section { padding: 80px 20px; }
 }
 
 /* KIWIFY EMBED */
-.checkout-right {
-  background: var(--white);
-  border-radius: 16px; overflow: hidden;
-  box-shadow: var(--shadow2);
-  min-height: 520px;
-}
-.kiwify-frame {
-  width: 100%; min-height: 520px;
-  border: none; display: block;
-}
+
 
 /* ── FAQ ─── */
 .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
@@ -516,8 +507,6 @@ footer {
 @media (max-width: 768px) {
   section { padding: 60px 16px; }
   .checkout-inner { grid-template-columns: 1fr; gap: 32px; }
-  .checkout-right { min-height: 600px; }
-  .kiwify-frame { min-height: 600px; }
   .workshop-box { padding: 32px 20px; }
   .tool-row { grid-template-columns: 64px 1fr; }
 }
@@ -542,8 +531,8 @@ footer {
       <div class="pill">📄 5 documentos gerados ao final</div>
       <div class="pill">🎯 Vagas limitadas</div>
     </div>
-    <a href="#checkout" class="btn-hero">🚀 Garantir minha vaga</a>
-    <p class="hero-note">R$ 597,00 · Garantia de 7 dias · Acesso imediato após confirmação</p>
+    <a href="https://pay.kiwify.com.br/bKgC2ua" class="btn-hero" target="_blank" rel="noopener">🚀 Garantir minha vaga</a>
+    <p class="hero-note">R$ 597 · Garantia de 7 dias · Acesso imediato após confirmação</p>
   </div>
 </section>
 
@@ -832,7 +821,7 @@ footer {
 
       <div class="price-display">
         <div class="label">Investimento</div>
-        <div class="amount">R$ 597,00 <small>à vista</small></div>
+        <div class="amount">R$ 597 <small>à vista</small></div>
         <div class="installment">ou até 12x no cartão</div>
       </div>
 
@@ -850,25 +839,15 @@ footer {
       </div>
     </div>
 
-    <div class="checkout-right">
-      <!--
-        INSTRUÇÕES DE INCORPORAÇÃO DO CHECKOUT KIWIFY:
-        1. Acesse sua conta na Kiwify
-        2. Vá em Produtos → seu produto → Checkout
-        3. Clique em "Incorporar checkout" ou "Embed"
-        4. Copie o código iframe gerado
-        5. Substitua o iframe abaixo pelo código copiado
-
-        Se a Kiwify não oferecer iframe, use o botão de link direto:
-        Substitua o src abaixo pela URL do seu checkout Kiwify
-      -->
-      <iframe
-        class="kiwify-frame"
-        src="https://pay.kiwify.com.br/bKgC2ua"
-        title="Checkout — Da Expertise ao Ativo Rentável"
-        allow="payment"
-        loading="lazy">
-      </iframe>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:48px 32px;text-align:center;">
+      <div style="font-size:56px">🔒</div>
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;line-height:1.2">Pagamento<br>100% seguro</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.5);font-style:italic;max-width:280px;line-height:1.6">Processado pela Kiwify. Clique no botão abaixo para ser redirecionado ao checkout.</div>
+      <a href="https://pay.kiwify.com.br/bKgC2ua" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:10px;background:#d97706;color:#fff;font-family:'Syne',sans-serif;font-size:17px;font-weight:800;padding:18px 40px;border-radius:10px;text-decoration:none;box-shadow:0 8px 32px rgba(217,119,6,.4);transition:all .25s">
+        🚀 Garantir minha vaga — R$ 597
+      </a>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.3)">ou até 12x no cartão · Garantia de 7 dias</div>
     </div>
   </div>
 </div>
@@ -952,8 +931,8 @@ footer {
   <div class="final-cta-inner">
     <h2>Você passou décadas aprendendo.</h2>
     <p>Chegou a hora de transformar esse aprendizado em algo que gera renda, autoridade e legado.</p>
-    <a href="#checkout" class="btn-hero">🚀 Garantir minha vaga agora</a>
-    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">R$ 597,00 · Garantia de 7 dias · Acesso vitalício às ferramentas</p>
+    <a href="https://pay.kiwify.com.br/bKgC2ua" class="btn-hero" target="_blank" rel="noopener">🚀 Garantir minha vaga agora</a>
+    <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">R$ 597 · Garantia de 7 dias · Acesso vitalício às ferramentas</p>
   </div>
 </div>
 
